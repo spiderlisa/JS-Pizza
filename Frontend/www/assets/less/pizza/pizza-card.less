@@ -1,4 +1,6 @@
 .pizza-card {
+  min-height: 560px;
+
   img {
     max-width: 250px;
   }
@@ -6,5 +8,93 @@
   h3 {
     color: @mainColor;
     background-color: lighten(@mainColor, 45%);
+    margin-bottom: 5px;
+    font-weight: 600;
+  }
+
+  .btn {
+    background: linear-gradient(rgb(245, 175, 72), @mainColor);
+    border-color: darken(@mainColor, 5%);
+    color: white;
+  }
+
+
+  .nova {
+    display: flex;
+    position: relative;
+    top: -5px;
+    right: -10px;
+  }
+
+  .populyarna {
+    display: flex;
+    position: relative;
+    top: -5px;
+    right: -10px;
+  }
+
+  .type {
+    color: #8b8b8b;
+    font-size: 12px;
+    margin: 0px;
+  }
+
+
+
+  .specifications {
+    div {
+      text-align: center;
+    }
+
+    .small-size {
+      position: relative;
+      text-align: center;
+      p {
+        width: 100px;
+        margin: 0px;
+        font-size: 12px;
+      }
+
+      p:nth-of-type(2) {
+        margin-bottom: 10px;
+      }
+
+      p:nth-of-type(3) {
+        font-size: 23px;
+        height: 25px;
+      }
+
+      p:last-of-type{
+        font-size: 10px;
+        margin-bottom: 7px;
+      }
+    }
+
+    .big-size {
+      position: relative;
+      text-align: center;
+      float: right;
+      p {
+        width: 100px;
+        margin: 0px;
+        font-size: 12px;
+      }
+
+      p:nth-of-type(2) {
+        margin-bottom: 10px;
+      }
+
+      p:nth-of-type(3) {
+        font-size: 23px;
+        height: 25px;
+      }
+
+      p:last-of-type{
+        font-size: 10px;
+        margin-bottom: 7px;
+      }
+    }
+
+
   }
 }

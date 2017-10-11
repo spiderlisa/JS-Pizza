@@ -1,3 +1,151 @@
-@mainColor: blue;
+@mainColor: rgba(235, 132, 43, 1);
+@header-height: 80px;
 
 @import "pizza/pizza-card";
+
+* {
+  font-family: "Trebuchet MS";
+}
+
+#header {
+  background: rgba(0, 0, 0, 0.8);
+  width: 100%;
+  height: @header-height;
+  position: fixed;
+  top: 0px;
+
+  span {
+    position: relative;
+    left: 15px + @header-height + 20px + 30px;
+    top: 10px;
+    color: #a1a1a1;
+    font-size: 15px;
+    font-weight: 300;
+    padding-right: 30px;
+  }
+
+  p {
+    position: relative;
+    left: 15px + @header-height + 20px + 30px;
+    color: white;
+    font-size: 17px;
+    top: -12px;
+  }
+
+  hr {
+    position: relative;
+    margin-left: 15px + @header-height + 20px + 30px;
+    margin-right: 113px;
+  }
+
+  a {
+    position: absolute;
+    display: inline-block;
+    top: 25px;
+    right: 2%;
+    background: linear-gradient(rgb(245, 175, 72), @mainColor);
+    border-color: darken(@mainColor, 10%);
+    color: white;
+  }
+}
+
+.top-label {
+  position: fixed;
+  top: 0px;
+  left: 15px;
+  background: @mainColor;
+  border: 1px darken(@mainColor, 10%) solid;
+  border-bottom: 0px;
+  width: @header-height + 20px;
+  height: @header-height + 10px;
+  color: white;
+  text-align: center;
+  font-weight: 600;
+
+  h1 {
+    margin-top: 9px;
+    font-size: 23px;
+  }
+
+  h2 {
+    margin: 0px;
+    font-size: 28px;
+  }
+
+  img {
+    position: fixed;
+    top: @header-height + 10px;
+    left: 15px;
+    transform: rotate(180deg);
+  }
+}
+
+.container {
+  position: relative;
+  top: @header-height + 20px;
+}
+
+.top-row {
+  text-align: center;
+
+  div {
+    color: black;
+    font-size: 20px;
+    .badge {
+      background-color: @mainColor;
+    }
+  }
+
+  a.btn {
+    color: @mainColor;
+  }
+
+  a.btn.pressed {
+    background-color: @mainColor;
+    color: white;
+  }
+}
+
+#pizza_list{
+  position: relative;
+  top: 20px;
+}
+
+.discount {
+  position: fixed;
+  bottom: 0px;
+  left: 15px;
+  width: @header-height + 20px;
+  height: @header-height + 50px;
+  background-color: @mainColor;
+  border: 1px darken(@mainColor, 10%) solid;
+  border-top: 0px;
+  color: white;
+  text-align: center;
+
+  img {
+    position: fixed;
+    bottom: @header-height + 50px;
+    left: 15px;
+  }
+
+  p {
+    font-size: 17px;
+    font-weight: 600;
+    padding-bottom: 0px;
+    margin: 0px;
+  }
+
+  p:first-of-type {
+    margin-top: 9px;
+  }
+
+  hr {
+    position: relative;
+    left: 8px;
+    margin: 5px 0px;
+    width: @header-height;
+    border: 1px dashed;
+    color: darken(@mainColor, 10%);
+  }
+}
