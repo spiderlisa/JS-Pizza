@@ -1,5 +1,7 @@
 @mainColor: rgba(235, 132, 43, 1);
 @header-height: 80px;
+@bottom-height: 110px;
+@cart-width: 250px;
 
 @import "pizza/pizza-card";
 
@@ -7,12 +9,81 @@
   font-family: "Trebuchet MS";
 }
 
-#header {
-  background: rgba(0, 0, 0, 0.8);
+.bottom-row {
+  height: @bottom-height;
   width: 100%;
-  height: @header-height;
+
+}
+
+#cart {
+  display: inline-block;
+  height: 100%;
+  position: fixed;
+  right: 0px;
+  top: 0px;
+  background-color: rgb(226, 226, 226);
+  padding: 0px;
+  z-index: 11;
+
+  .separate {
+    width: 100%;
+    height: 80px;
+    padding: 25px 10px;
+    background-color: white;
+    position: fixed;
+
+
+    span {
+      position: absolute;
+      left: 10px;
+      color: black;
+      font-size: 18px;
+
+      .badge {
+        position: absolute;
+        left: 50px;
+        background-color: @mainColor;
+        color: white;
+      }
+    }
+
+    .btn-default {
+      background-color: white;
+      color: #8b8b8b;
+      padding-right: 15px;
+      border: 0px;
+      font-size: 11px;
+      position: absolute;
+      right: 10px;
+    }
+
+  }
+
+  .separate:last-of-type{
+    padding: 10px;
+    height: 100px;
+    bottom: 0px;
+
+    span:last-of-type {
+      float: right;
+    }
+
+    .btn-warning {
+      width: inherit;
+      background-color: linear-gradient(rgb(245, 175, 72), @mainColor);
+    }
+  }
+}
+
+#header {
   position: fixed;
   top: 0px;
+  box-sizing: border-box;
+  width: 100%;
+  height: @header-height;
+  padding-right: @cart-width;
+  background: rgba(0, 0, 0, 0.8);
+  z-index: 10;
 
   span {
     position: relative;
@@ -35,80 +106,31 @@
   hr {
     position: relative;
     margin-left: 15px + @header-height + 20px + 30px;
-    margin-right: 113px;
+    margin-right: 95px;
   }
 
   a {
     position: absolute;
     display: inline-block;
     top: 25px;
-    right: 2%;
+    right: @cart-width+15px;
     background: linear-gradient(rgb(245, 175, 72), @mainColor);
     border-color: darken(@mainColor, 10%);
     color: white;
   }
 }
 
-.top-label {
-  position: fixed;
-  top: 0px;
-  left: 15px;
-  background: @mainColor;
-  border: 1px darken(@mainColor, 10%) solid;
-  border-bottom: 0px;
-  width: @header-height + 20px;
-  height: @header-height + 10px;
-  color: white;
-  text-align: center;
-  font-weight: 600;
-
-  h1 {
-    margin-top: 9px;
-    font-size: 23px;
-  }
-
-  h2 {
-    margin: 0px;
-    font-size: 28px;
-  }
-
-  img {
-    position: fixed;
-    top: @header-height + 10px;
-    left: 15px;
-    transform: rotate(180deg);
-  }
+#pizza_list{
+  position: relative;
+  margin-top: 45px;
+  padding: 0px 25px;
 }
 
 .container {
+  margin: auto;
+  padding: 0px;
+  background-color: rgb(255, 255, 246);
   position: relative;
-  top: @header-height + 20px;
-}
-
-.top-row {
-  text-align: center;
-
-  div {
-    color: black;
-    font-size: 20px;
-    .badge {
-      background-color: @mainColor;
-    }
-  }
-
-  a.btn {
-    color: @mainColor;
-  }
-
-  a.btn.pressed {
-    background-color: @mainColor;
-    color: white;
-  }
-}
-
-#pizza_list{
-  position: relative;
-  top: 20px;
 }
 
 .discount {
@@ -147,5 +169,69 @@
     width: @header-height;
     border: 1px dashed;
     color: darken(@mainColor, 10%);
+  }
+}
+
+.bottom-row {
+  width: 100%;
+  height: @header-height*2;
+  padding-top: 40px;
+  text-align: center;
+  font-size: 15px;
+  color: #676767;
+  background: linear-gradient(rgb(240, 240, 240), white, rgb(240, 240, 240));
+  border-top: #bfbfbf 1px solid;
+}
+
+.top-label {
+  position: fixed;
+  top: 0px;
+  left: 15px;
+  background: @mainColor;
+  border: 1px darken(@mainColor, 10%) solid;
+  border-bottom: 0px;
+  width: @header-height + 20px;
+  height: @header-height + 10px;
+  color: white;
+  text-align: center;
+  font-weight: 600;
+
+  h1 {
+    margin-top: 9px;
+    font-size: 23px;
+  }
+
+  h2 {
+    margin: 0px;
+    font-size: 28px;
+  }
+
+  img {
+    position: fixed;
+    top: @header-height + 10px;
+    left: 15px;
+    transform: rotate(180deg);
+  }
+}
+
+.top-row {
+  margin-top: @header-height+ 30px;
+  text-align: center;
+
+  div {
+    color: black;
+    font-size: 20px;
+    .badge {
+      background-color: @mainColor;
+    }
+  }
+
+  a.btn {
+    color: @mainColor;
+  }
+
+  a.btn.pressed {
+    background-color: @mainColor;
+    color: white;
   }
 }
