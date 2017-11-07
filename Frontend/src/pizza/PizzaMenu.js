@@ -7,6 +7,7 @@ var Pizza_List = require('../Pizza_List');
 
 //HTML едемент куди будуть додаватися піци
 var $pizza_list = $("#pizza_list");
+var $top_row = $(".top-row");
 
 function showPizzaList(list) {
     //Очищаємо старі піци в кошику
@@ -36,10 +37,19 @@ function filterPizza(filter) {
     var pizza_shown = [];
 
     Pizza_List.forEach(function(pizza){
-        //Якщо піка відповідає фільтру
-        //pizza_shown.push(pizza);
-
-        //TODO: зробити фільтри
+        if (filter == "all-types") {
+            pizza_shown.push(pizza);
+        }else if (filter == "meat-types") {
+            if (pizza.content.meat.length > 0 || pizza.content.chicken.length > 0) pizza_shown.push(pizza);
+        }else if (filter == "pineapple-types") {
+            if (pizza.content.pineapple.length > 0) pizza_shown.push(pizza);
+        }else if (filter == "mushroom-types") {
+            if (pizza.content.mushroom.length > 0) pizza_shown.push(pizza);
+        }else if (filter == "seafood-types") {
+            if (pizza.content.ocean.length > 0) pizza_shown.push(pizza);
+        }else if (filter == "vegan-types") {
+            if (pizza.content.meat.length == 0 && pizza.content.chicken.length == 0 && pizza.content.ocean.length == 0) pizza_shown.push(pizza);
+        }
     });
 
     //Показати відфільтровані піци
@@ -48,7 +58,8 @@ function filterPizza(filter) {
 
 function initialiseMenu() {
     //Показуємо усі піци
-    showPizzaList(Pizza_List)
+    showPizzaList(Pizza_List);
+    //$top_row.find(".btn").click(filterPizza(event.target.id));
 }
 
 exports.filterPizza = filterPizza;

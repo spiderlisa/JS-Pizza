@@ -13,13 +13,15 @@ function getIngredientsArray(pizza) {
         result = result.concat(content[key]);
     });
 
+    result[0] = result[0].charAt(0).toUpperCase() + result[0].substring(1);
+
     return result;
 }
 
    %>
-<div class="col-md-6 col-lg-4 pizza-card">
-    <div class="thumbnail">
-        <img class="pizza-icon" src="<%= pizza.icon %>" alt="Pizza">
+<div class="col-md-6 col-lg-4">
+    <div class="thumbnail pizza-card">
+        <img class="pic" src="<%= pizza.icon %>" alt="Pizza">
 
         <% if(pizza.is_new) { %>
         <span class="label label-danger">Нова</span>
@@ -28,14 +30,32 @@ function getIngredientsArray(pizza) {
         <% } %>
 
         <div class="caption">
-            <span class="title"><%= pizza.title %></span>
-            <div class="type"><%= pizza.type %></div>
-            <div class="description">
+            <h3><%= pizza.title %></h3>
+            <p class="type"><%= pizza.type %></p>
+            <p class="description">
                 <%= getIngredientsArray(pizza).join(", ") %>
+            </p>
+
+            <div class="specifications">
+                <% if (pizza.has_small) { %>
+                <div <% if (pizza.has_big) { %> class="col-xs-6 size" <% } else { %> class="col-xs-12 size" <% } %> >
+                    <p class="size"><img src="assets/images/size-icon.svg"> <%= pizza.small_size.size %></p>
+                    <p class="weight"><img src="assets/images/weight.svg"> <%= pizza.small_size.weight %></p>
+                    <p><%= pizza.small_size.price %></p>
+                    <p>грн.</p>
+                    <a href="#" class="btn btn-primary buy-small">Купити</a>
+                </div>
+                <% } %>
+                <% if (pizza.has_big) { %>
+                <div <% if (pizza.has_small) { %> class="col-xs-6 size" <% } else { %> class="col-xs-12 size" <% } %> style="float: right">
+                    <p class="size"><img src="assets/images/size-icon.svg"> <%= pizza.big_size.size %></p>
+                    <p class="weight"><img src="assets/images/weight.svg"> <%= pizza.big_size.weight %></p>
+                    <p><%= pizza.big_size.price %></p>
+                    <p>грн.</p>
+                    <a href="#" class="btn btn-default buy-big">Купити</a>
+                </div>
+                <% } %>
             </div>
         </div>
-
-        <!-- Перед тим щоб показати кнопку необхідно переконатися, що піца має великий розмір -->
-        <button class="btn btn-primary buy-big">Купити велику</button>
     </div>
 </div>

@@ -1,9 +1,32 @@
-<div>
-    <%= pizza.title %> (<%= size %>)
-    <div>Ціна: <%= pizza[size].price %> грн.</div>
-    <div>
-        <button class="btn btn-danger minus">-</button>
+<%
+
+function defineSize(size) {
+    if (size=="big_size") return "Велика";
+    else return "Мала";
+}
+
+%>
+
+<div class="one-order">
+
+    <img class="pic-cart" src="<%= pizza.icon %>">
+    <p class="title-cart"><%= pizza.title %> (<%= defineSize(size) %>)</p>
+    <p class="details">
+        <span class="size"><img src="assets/images/size-icon.svg"> <%= pizza[size].size %></span>
+        <span class="weight"><img src="assets/images/weight.svg"> <%= pizza[size].weight %></span>
+    </p>
+    <p>
+        <span style="font-weight: 600; padding-right: 12px"><%= pizza[size].price %> грн </span>
+        <button class="btn btn-xs btn-danger minus">
+            <i class="glyphicon glyphicon-minus icon-white"></i>
+        </button>
         <span class="label label-default"><%= quantity %></span>
-        <button class="btn btn-success plus">+</button>
-    </div>
+        <button class="btn btn-xs btn-success plus">
+            <i class="glyphicon glyphicon-plus icon-white"></i>
+        </button>
+        <button class="btn btn-xs btn-default delete">
+            <i class="glyphicon glyphicon-remove icon-white"></i>
+        </button>
+    </p>
 </div>
+

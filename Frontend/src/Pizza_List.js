@@ -26,8 +26,8 @@ var pizza_info = [
             price: 169
         },
         is_new:true,
-        is_popular:true
-
+        has_small: true,
+        has_big: true
     },
     {
         id:2,
@@ -50,7 +50,9 @@ var pizza_info = [
             size: 40,
             price: 199
         },
-        is_popular:true
+        is_popular:true,
+        has_small: true,
+        has_big: true
     },
     {
         id:3,
@@ -72,7 +74,9 @@ var pizza_info = [
             weight: 780,
             size: 40,
             price: 179
-        }
+        },
+        has_small: true,
+        has_big: true
     },
     {
         id:4,
@@ -94,7 +98,9 @@ var pizza_info = [
             weight: 790,
             size: 40,
             price: 169
-        }
+        },
+        has_small: true,
+        has_big: true
     },
     {
         id:17,
@@ -110,7 +116,9 @@ var pizza_info = [
             weight: 370,
             size: 30,
             price: 89
-        }
+        },
+        has_small: true,
+        has_big: false
     },
     {
         id:43,
@@ -133,7 +141,9 @@ var pizza_info = [
             weight: 780,
             size: 40,
             price: 180
-        }
+        },
+        has_small: true,
+        has_big: true
     },
     {
         id:90,
@@ -149,7 +159,9 @@ var pizza_info = [
             weight: 845,
             size: 40,
             price: 399
-        }
+        },
+        has_small: false,
+        has_big: true
     },
     {
         id:6,
@@ -170,7 +182,9 @@ var pizza_info = [
             weight: 700,
             size: 40,
             price: 299
-        }
+        },
+        has_small: true,
+        has_big: true
     }
 ];
 
