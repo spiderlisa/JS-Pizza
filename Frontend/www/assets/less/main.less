@@ -37,6 +37,7 @@
     padding: 25px 10px;
     background-color: white;
     position: fixed;
+    z-index: 5;
 
     span {
       position: relative;
@@ -69,65 +70,83 @@
 
   }
 
-  #orders {
+  .base {
     position: relative;
     top: 80px;
   }
-    .one-order {
-      height: 120px;
-      padding: 20px 61px 10px 24px;
-      border-bottom: 1px solid rgba(0,0,0,.1);
-      position: relative;
 
-      .pic-cart {
-        position: absolute;
-        right: -48px;
-        top: 15px;
-        border-radius: 50% 0 0 50%;
-        max-height: 96px;
-        max-width: 96px;
-      }
+  #orders {
+    overflow-x: hidden;
+    overflow-y: auto;
+    position: relative;
+    box-sizing: border-box;
+    height: 100%;
+    width: 100%;
+    padding-top: 80px;
+    padding-bottom: 100px;
+  }
 
-      p {
-        margin-bottom: 3px;
-      }
+  .one-order {
+    height: 120px;
+    padding: 20px 61px 10px 24px;
+    border-bottom: 1px solid rgba(0,0,0,.1);
+    position: relative;
 
-      .title-cart {
-        font-size: 21px;
-        color: @mainColor;
-        font-weight: 500;
-      }
-
-      .size, .weight {
-        margin-right: 10px;
-        font-size: 11px;
-      }
-
-      .btn {
-        font-weight: 600;
-        width: 30px;
-        height: 30px;
-        padding: 6px 0;
-        font-size: 12px;
-        line-height: 1.428571429;
-        border-radius: 15px;
-      }
-
-      .btn-default {
-        background-color: antiquewhite;
-        color: @mainColor;
-        margin-left: 20px;
-      }
-
-      .label {
-        background-color: transparent;
-        color: black;
-        font-size: 15px;
-      }
+    .pic-cart {
+      position: absolute;
+      right: -48px;
+      top: 15px;
+      border-radius: 50% 0 0 50%;
+      max-height: 96px;
+      max-width: 96px;
     }
 
+    p {
+      margin-bottom: 3px;
+    }
 
-  #cart-bottom{
+    .title-cart {
+      font-size: 21px;
+      color: @mainColor;
+      font-weight: 500;
+    }
+
+    .size, .weight {
+      margin-right: 10px;
+      font-size: 11px;
+    }
+
+    .btn {
+      font-weight: 600;
+      width: 30px;
+      height: 30px;
+      padding: 6px 0;
+      font-size: 12px;
+      line-height: 1.428571429;
+      border-radius: 15px;
+    }
+
+    .btn-default {
+      background-color: antiquewhite;
+      color: @mainColor;
+      margin-left: 20px;
+    }
+
+    .label {
+      background-color: transparent;
+      color: black;
+      font-size: 15px;
+    }
+  }
+
+  .empty-cart {
+    width: 100%;
+    text-align: center;
+    font-size: 15px;
+    display: inline-block;
+  }
+
+  #cart-bottom {
     width: @cart-width;
     background-color: white;
     position: fixed;
@@ -136,6 +155,7 @@
     bottom: 0;
     font-size: 18px;
     font-weight: 600;
+    z-index: 5;
 
     #sum {
       position: fixed;

@@ -4,6 +4,30 @@
 
 var pizza_info = [
     {
+        id:6,
+        icon:'assets/images/pizza_4.jpg',
+        title: "Россо Густо",
+        type: 'Морська піца',
+        content: {
+            ocean: ['ікра червона', 'лосось копчений'],
+            cheese: ['сир моцарелла'],
+            additional: ['оливкова олія', 'вершки']
+        },
+        small_size:{
+            weight: 400,
+            size: 30,
+            price: 189
+        },
+        big_size:{
+            weight: 700,
+            size: 40,
+            price: 299
+        },
+        is_new:true,
+        has_small: true,
+        has_big: true
+    },
+    {
         id:1,
         icon:'assets/images/pizza_7.jpg',
         title: "Імпреза",
@@ -25,32 +49,49 @@ var pizza_info = [
             size: 40,
             price: 169
         },
-        is_new:true,
+        is_popular:true,
         has_small: true,
         has_big: true
     },
     {
-        id:2,
-        icon:'assets/images/pizza_2.jpg',
-        title: "BBQ",
-        type: 'М’ясна піца',
+        id:17,
+        icon:'assets/images/pizza_3.jpg',
+        title: "Маргарита",
+        type: 'Вега піца',
         content: {
-            meat: ['мисливські ковбаски', 'ковбаски папероні', 'шинка'],
-            cheese: ['сир домашній'],
-            mushroom: ['шампінйони'],
-            additional: ['петрушка', 'оливки']
+            cheese: ['сир моцарелла', 'сир домашній'],
+            tomato: ['помідори'],
+            additional: ['базилік', 'оливкова олія', 'соус томатний']
         },
         small_size:{
-            weight: 460,
+            weight: 370,
             size: 30,
-            price: 139
+            price: 89
+        },
+        has_small: true,
+        has_big: false
+    },
+    {
+        id:4,
+        icon:'assets/images/pizza_5.jpg',
+        title: "Сициліано",
+        type: 'М’ясна піца',
+        content: {
+            meat: ['вітчина', 'салямі'],
+            cheese: ['сир моцарелла'],
+            mushroom: ['шампінйони'],
+            additional: ['перець болгарський',  'соус томатний']
+        },
+        small_size:{
+            weight: 450,
+            size: 30,
+            price: 111
         },
         big_size:{
-            weight: 840,
+            weight: 790,
             size: 40,
-            price: 199
+            price: 169
         },
-        is_popular:true,
         has_small: true,
         has_big: true
     },
@@ -79,68 +120,25 @@ var pizza_info = [
         has_big: true
     },
     {
-        id:4,
-        icon:'assets/images/pizza_5.jpg',
-        title: "Сициліано",
+        id:2,
+        icon:'assets/images/pizza_2.jpg',
+        title: "BBQ",
         type: 'М’ясна піца',
         content: {
-            meat: ['вітчина', 'салямі'],
-            cheese: ['сир моцарелла'],
+            meat: ['мисливські ковбаски', 'ковбаски папероні', 'шинка'],
+            cheese: ['сир домашній'],
             mushroom: ['шампінйони'],
-            additional: ['перець болгарський',  'соус томатний']
+            additional: ['петрушка', 'оливки']
         },
         small_size:{
-            weight: 450,
+            weight: 460,
             size: 30,
-            price: 111
+            price: 139
         },
         big_size:{
-            weight: 790,
+            weight: 840,
             size: 40,
-            price: 169
-        },
-        has_small: true,
-        has_big: true
-    },
-    {
-        id:17,
-        icon:'assets/images/pizza_3.jpg',
-        title: "Маргарита",
-        type: 'Вега піца',
-        content: {
-            cheese: ['сир моцарелла', 'сир домашній'],
-            tomato: ['помідори'],
-            additional: ['базилік', 'оливкова олія', 'соус томатний']
-        },
-        small_size:{
-            weight: 370,
-            size: 30,
-            price: 89
-        },
-        has_small: true,
-        has_big: false
-    },
-    {
-        id:43,
-        icon:'assets/images/pizza_6.jpg',
-        title: "Мікс смаків",
-        type: 'М’ясна піца',
-        content: {
-            meat: ['ковбаски'],
-            cheese: ['сир моцарелла'],
-            mushroom: ['шампінйони'],
-            pineapple: ['ананаси'],
-            additional: ['цибуля кримська', 'огірки квашені', 'соус гірчичний']
-        },
-        small_size:{
-            weight: 470,
-            size: 30,
-            price: 115
-        },
-        big_size:{
-            weight: 780,
-            size: 40,
-            price: 180
+            price: 199
         },
         has_small: true,
         has_big: true
@@ -164,24 +162,26 @@ var pizza_info = [
         has_big: true
     },
     {
-        id:6,
-        icon:'assets/images/pizza_4.jpg',
-        title: "Россо Густо",
-        type: 'Морська піца',
+        id:43,
+        icon:'assets/images/pizza_6.jpg',
+        title: "Мікс смаків",
+        type: 'М’ясна піца',
         content: {
-            ocean: ['ікра червона', 'лосось копчений'],
+            meat: ['ковбаски'],
             cheese: ['сир моцарелла'],
-            additional: ['оливкова олія', 'вершки']
+            mushroom: ['шампінйони'],
+            pineapple: ['ананаси'],
+            additional: ['цибуля кримська', 'огірки квашені', 'соус гірчичний']
         },
         small_size:{
-            weight: 400,
+            weight: 470,
             size: 30,
-            price: 189
+            price: 115
         },
         big_size:{
-            weight: 700,
+            weight: 780,
             size: 40,
-            price: 299
+            price: 180
         },
         has_small: true,
         has_big: true

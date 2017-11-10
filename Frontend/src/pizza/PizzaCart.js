@@ -13,11 +13,16 @@ var PizzaSize = {
 var Cart = [];
 var sum = 0;
 
+//local storage
+var Storage = require('../LocalStorage');
+var orders = {};
+
 //HTML едемент куди будуть додаватися піци
 var $cart = $("#cart");
 var $header = $("#cart-header");
 var $bottom = $("#cart-bottom");
 var $order = $("#orders");
+var $empty_label = $(".empty-cart");
 
 function addToCart(pizza, size) {
     //Додавання однієї піци в кошик покупок
@@ -55,9 +60,11 @@ function removeFromCart(cart_item) {
 }
 
 function initialiseCart() {
-    //Фукнція віпрацьвуватиме при завантаженні сторінки
-    //Тут можна наприклад, зчитати вміст корзини який збережено в Local Storage то показати його
-    //TODO: ...
+    var saved_orders = Storage.get("cart");
+    if (saved_orders) {
+        orders = saved_orders;
+    }
+    Cart = orders;
 
     updateCart();
 }
@@ -68,12 +75,10 @@ function getPizzaInCart() {
 }
 
 function updateCart() {
-    //Функція викликається при зміні вмісту кошика
-    //Тут можна наприклад показати оновлений кошик на екрані та зберегти вміт кошика в Local Storage
-
     //Очищаємо старі піци в кошику
     $order.html("");
     $cart.html("");
+    sum = 0;
 
     //Оновлення однієї піци
     function showOnePizzaInCart(cart_item) {
@@ -105,7 +110,7 @@ function updateCart() {
     }
 
     function calculateSum(cart_item) {
-        sum += Number.parseInt(cart_item[size].price); //???????????????????????
+        sum += Number.parseInt(cart_item.pizza[cart_item.size].price) * Number.parseInt(cart_item.quantity);
     }
 
     $header.find(".badge").text(Cart.length);
@@ -114,13 +119,20 @@ function updateCart() {
     });
     $cart.append($header);
 
-    Cart.forEach(showOnePizzaInCart);
+    if (Cart.length == 0) {
+        $empty_label.css('display', 'block');
+    }else {
+        $empty_label.css('display', 'none');
+        Cart.forEach(showOnePizzaInCart);
+    }
     $cart.append($order);
 
-    //Cart.forEach(calculateSum);
-    //$bottom.find("#sum").text(sum);
+    Cart.forEach(calculateSum);
+    $bottom.find("#sum").text(sum + " грн");
     $cart.append($bottom);
 
+    orders = Cart;
+    Storage.set("cart", orders);
 }
 
 exports.removeFromCart = removeFromCart;

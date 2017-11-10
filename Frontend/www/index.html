@@ -26,7 +26,6 @@
     <a type="button" class="btn btn-default">Увійти</a>
     <hr>
     <p class="hidden-xs">Піца</p>
-
 </div>
 
 <div class="main-container container-fluid">
@@ -44,7 +43,7 @@
                 <a type="button" class="btn" id="vegan-types">Вега</a>
             </div>
             <div class="row" id="pizza_list">
-
+                <!-- all pizzas are displayed here -->
             </div>
         </div>
         <div class="bottom-row">
@@ -60,7 +59,11 @@
                 </a>
             </div>
             <div id="orders">
-
+                <div class="empty-cart">
+                    <p>Пусто в холодильнику?</p>
+                    <p>Замовте пiцу!</p>
+                </div>
+                <!-- all orders in cart go here -->
             </div>
             <div class="separate" id="cart-bottom">
                 <p>
@@ -83,12 +86,14 @@
 </div>
 
 
-
 <!-- jQuery JavaScript -->
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"> </script>
 
 <!--Bootsrap JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+<!--INSERT HERE GOOGLE MAPS CODE -->
+
 
 <!--Own JavaScript -->
 <script type="text/javascript"  src="assets/js/main.js"> </script>
