@@ -1,5 +1,7 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-
+/**
+ * created by lisa on 10.11.2017
+ */
 
 var basil = require('basil.js');
 basil = new basil();
@@ -256,7 +258,6 @@ var $cart = $("#cart");
 var $header = $("#cart-header");
 var $bottom = $("#cart-bottom");
 var $order = $("#orders");
-var $empty_label = $(".empty-cart");
 
 function addToCart(pizza, size) {
     //Додавання однієї піци в кошик покупок
@@ -294,11 +295,10 @@ function removeFromCart(cart_item) {
 }
 
 function initialiseCart() {
-    var saved_orders = Storage.get("cart");
-    if (saved_orders) {
-        orders = saved_orders;
+    var orders = Storage.get("cart");
+    if (orders) {
+        Cart = orders;
     }
-    Cart = orders;
 
     updateCart();
 }
@@ -320,14 +320,14 @@ function updateCart() {
 
         var $node = $(html_code);
 
-        $node.find(".plus").click(function(){
+        $node.find(".plus").click(function() {
             //Збільшуємо кількість замовлених піц
             cart_item.quantity += 1;
             //Оновлюємо відображення
             updateCart();
         });
 
-        $node.find(".minus").click(function(){
+        $node.find(".minus").click(function() {
             //Збільшуємо кількість замовлених піц
             if (cart_item.quantity == 1) removeFromCart(cart_item);
             else cart_item.quantity -= 1;
@@ -335,7 +335,7 @@ function updateCart() {
             updateCart();
         });
 
-        $node.find(".delete").click(function () {
+        $node.find(".delete").click(function() {
             removeFromCart(cart_item);
             updateCart();
         })
@@ -348,15 +348,15 @@ function updateCart() {
     }
 
     $header.find(".badge").text(Cart.length);
-    $header.find("#clear").click(function () {
+    $header.find("#clear").click(function() {
         Cart.forEach(removeFromCart);
     });
     $cart.append($header);
 
     if (Cart.length == 0) {
-        $empty_label.css('display', 'block');
+        //$empty_label.css('display', 'block');
     }else {
-        $empty_label.css('display', 'none');
+        //$empty_label.css('display', 'none');
         Cart.forEach(showOnePizzaInCart);
     }
     $cart.append($order);
@@ -398,10 +398,13 @@ function showPizzaList(list) {
 
         var $node = $(html_code);
 
-        $node.find(".buy-big").click(function(){
+        $node.find(".buy-big").click(function (e) {
+            e.preventDefault();
             PizzaCart.addToCart(pizza, PizzaCart.PizzaSize.Big);
         });
-        $node.find(".buy-small").click(function(){
+
+        $node.find(".buy-small").click(function (e) {
+            e.preventDefault();
             PizzaCart.addToCart(pizza, PizzaCart.PizzaSize.Small);
         });
 
@@ -415,30 +418,36 @@ function filterPizza(filter) {
     //Масив куди потраплять піци які треба показати
     var pizza_shown = [];
 
-    Pizza_List.forEach(function(pizza){
-        if (filter == "all-types") {
+    Pizza_List.forEach(function (pizza) {
+        if (filter == "all") {
             pizza_shown.push(pizza);
-        }else if (filter == "meat-types") {
-            if (pizza.content.meat.length > 0 || pizza.content.chicken.length > 0) pizza_shown.push(pizza);
-        }else if (filter == "pineapple-types") {
-            if (pizza.content.pineapple.length > 0) pizza_shown.push(pizza);
-        }else if (filter == "mushroom-types") {
-            if (pizza.content.mushroom.length > 0) pizza_shown.push(pizza);
-        }else if (filter == "seafood-types") {
-            if (pizza.content.ocean.length > 0) pizza_shown.push(pizza);
-        }else if (filter == "vegan-types") {
-            if (pizza.content.meat.length == 0 && pizza.content.chicken.length == 0 && pizza.content.ocean.length == 0) pizza_shown.push(pizza);
+        }else if (filter == "vegan") {
+            if (!pizza.content.meat && !pizza.content.chicken && !pizza.content.ocean) pizza_shown.push(pizza);
+        }else {
+            if (pizza.content[filter]) pizza_shown.push(pizza);
         }
     });
 
     //Показати відфільтровані піци
     showPizzaList(pizza_shown);
+
+    $top_row.find("#by-type").text(pizza_shown.length);
 }
 
 function initialiseMenu() {
+    $top_row.find(".btn").click(function() {
+        $top_row.find(".btn").removeClass('pressed');
+        $(this).addClass('pressed');
+        filterPizza(event.target.id)
+    });
+
     //Показуємо усі піци
     showPizzaList(Pizza_List);
-    //$top_row.find(".btn").click(filterPizza(event.target.id));
+
+    var $home = $(".top-label");
+    $home.click(function () {
+        location.reload();
+    });
 }
 
 exports.filterPizza = filterPizza;

@@ -22,7 +22,6 @@ var $cart = $("#cart");
 var $header = $("#cart-header");
 var $bottom = $("#cart-bottom");
 var $order = $("#orders");
-var $empty_label = $(".empty-cart");
 
 function addToCart(pizza, size) {
     //Додавання однієї піци в кошик покупок
@@ -60,11 +59,10 @@ function removeFromCart(cart_item) {
 }
 
 function initialiseCart() {
-    var saved_orders = Storage.get("cart");
-    if (saved_orders) {
-        orders = saved_orders;
+    var orders = Storage.get("cart");
+    if (orders) {
+        Cart = orders;
     }
-    Cart = orders;
 
     updateCart();
 }
@@ -86,14 +84,14 @@ function updateCart() {
 
         var $node = $(html_code);
 
-        $node.find(".plus").click(function(){
+        $node.find(".plus").click(function() {
             //Збільшуємо кількість замовлених піц
             cart_item.quantity += 1;
             //Оновлюємо відображення
             updateCart();
         });
 
-        $node.find(".minus").click(function(){
+        $node.find(".minus").click(function() {
             //Збільшуємо кількість замовлених піц
             if (cart_item.quantity == 1) removeFromCart(cart_item);
             else cart_item.quantity -= 1;
@@ -101,7 +99,7 @@ function updateCart() {
             updateCart();
         });
 
-        $node.find(".delete").click(function () {
+        $node.find(".delete").click(function() {
             removeFromCart(cart_item);
             updateCart();
         })
@@ -114,15 +112,15 @@ function updateCart() {
     }
 
     $header.find(".badge").text(Cart.length);
-    $header.find("#clear").click(function () {
+    $header.find("#clear").click(function() {
         Cart.forEach(removeFromCart);
     });
     $cart.append($header);
 
     if (Cart.length == 0) {
-        $empty_label.css('display', 'block');
+        //$empty_label.css('display', 'block');
     }else {
-        $empty_label.css('display', 'none');
+        //$empty_label.css('display', 'none');
         Cart.forEach(showOnePizzaInCart);
     }
     $cart.append($order);

@@ -19,10 +19,13 @@ function showPizzaList(list) {
 
         var $node = $(html_code);
 
-        $node.find(".buy-big").click(function(){
+        $node.find(".buy-big").click(function (e) {
+            e.preventDefault();
             PizzaCart.addToCart(pizza, PizzaCart.PizzaSize.Big);
         });
-        $node.find(".buy-small").click(function(){
+
+        $node.find(".buy-small").click(function (e) {
+            e.preventDefault();
             PizzaCart.addToCart(pizza, PizzaCart.PizzaSize.Small);
         });
 
@@ -36,30 +39,36 @@ function filterPizza(filter) {
     //Масив куди потраплять піци які треба показати
     var pizza_shown = [];
 
-    Pizza_List.forEach(function(pizza){
-        if (filter == "all-types") {
+    Pizza_List.forEach(function (pizza) {
+        if (filter == "all") {
             pizza_shown.push(pizza);
-        }else if (filter == "meat-types") {
-            if (pizza.content.meat.length > 0 || pizza.content.chicken.length > 0) pizza_shown.push(pizza);
-        }else if (filter == "pineapple-types") {
-            if (pizza.content.pineapple.length > 0) pizza_shown.push(pizza);
-        }else if (filter == "mushroom-types") {
-            if (pizza.content.mushroom.length > 0) pizza_shown.push(pizza);
-        }else if (filter == "seafood-types") {
-            if (pizza.content.ocean.length > 0) pizza_shown.push(pizza);
-        }else if (filter == "vegan-types") {
-            if (pizza.content.meat.length == 0 && pizza.content.chicken.length == 0 && pizza.content.ocean.length == 0) pizza_shown.push(pizza);
+        }else if (filter == "vegan") {
+            if (!pizza.content.meat && !pizza.content.chicken && !pizza.content.ocean) pizza_shown.push(pizza);
+        }else {
+            if (pizza.content[filter]) pizza_shown.push(pizza);
         }
     });
 
     //Показати відфільтровані піци
     showPizzaList(pizza_shown);
+
+    $top_row.find("#by-type").text(pizza_shown.length);
 }
 
 function initialiseMenu() {
+    $top_row.find(".btn").click(function() {
+        $top_row.find(".btn").removeClass('pressed');
+        $(this).addClass('pressed');
+        filterPizza(event.target.id)
+    });
+
     //Показуємо усі піци
     showPizzaList(Pizza_List);
-    //$top_row.find(".btn").click(filterPizza(event.target.id));
+
+    var $home = $(".top-label");
+    $home.click(function () {
+        location.reload();
+    });
 }
 
 exports.filterPizza = filterPizza;

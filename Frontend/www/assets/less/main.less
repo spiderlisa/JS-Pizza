@@ -170,6 +170,16 @@
       width: @cart-width - 25px;
       color: white;
       background: linear-gradient(rgb(245, 175, 72), @mainColor);
+
+      &:hover {
+        background: linear-gradient(darken(rgb(245, 175, 72), 5%), darken(@mainColor, 5%));
+      }
+
+      &:active {
+        background: linear-gradient(darken(rgb(245, 175, 72), 10%), darken(@mainColor, 10%));
+        border-color: darken(@mainColor, 15%);
+        color: white;
+      }
     }
   }
 }
@@ -344,17 +354,23 @@
     }
   }
 
-  a.btn {
+  .btn {
+    background: transparent;
     color: @mainColor;
   }
 
-  a.btn.pressed {
-    background-color: @mainColor;
+  .pressed {
+    background: @mainColor;
     color: white;
   }
 
-  a.btn:hover {
-    background-color: antiquewhite;
+  .btn:hover {
+    background: antiquewhite;
     color: @mainColor;
+  }
+
+  .pressed:hover {
+    background: darken(@mainColor, 5%);
+    color: white;
   }
 }
