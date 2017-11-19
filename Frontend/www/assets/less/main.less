@@ -145,6 +145,7 @@
     text-align: center;
     font-size: 15px;
     display: inline-block;
+    margin-top: 40px;
   }
 
   #cart-bottom {
@@ -180,6 +181,28 @@
         background: linear-gradient(darken(rgb(245, 175, 72), 10%), darken(@mainColor, 10%));
         border-color: darken(@mainColor, 15%);
         color: white;
+      }
+    }
+
+    #return-to-list {
+      position: relative;
+      margin-top: 7px;
+      left: 3px;
+      width: @cart-width - 25px;
+      color: #111111;
+      text-shadow: #676767;
+      background: linear-gradient(rgb(242, 242, 242), #b5b5b5);
+      border-color: darken(#b5b5b5, 5%);
+
+      &:hover {
+        background: linear-gradient(darken(rgb(242, 242, 242), 5%), darken(#b5b5b5, 5%));
+      }
+
+      &:active {
+        background: linear-gradient(darken(rgb(242, 242, 242), 10%), darken(#b5b5b5, 10%));
+        border-color: darken(#b5b5b5, 15%);
+        color: #111111;
+        text-shadow: #676767;
       }
     }
   }
@@ -290,13 +313,13 @@
 
 .bottom-row {
   width: 100%;
-  height: @header-height*2;
+  height: 200px;
   padding-top: 40px;
   padding-right: 350px;
   text-align: center;
   font-size: 15px;
   color: #676767;
-  background: linear-gradient(rgb(240, 240, 240), white, rgb(240, 240, 240));
+  background: rgb(240, 240, 240);
   border-top: #bfbfbf 1px solid;
 }
 
@@ -375,3 +398,63 @@
     color: white;
   }
 }
+
+.form-description {
+  font-size: 20px;
+  padding-bottom: 10px;
+  margin-top: 100px;
+  margin-bottom: 20px;
+  font-weight: 700;
+}
+
+.form-group .form-horizontal {
+  margin-right: -15px;
+  margin-left: -15px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.help-block {
+  margin-left: 100px;
+  color: #880a02;
+}
+
+.bs-callout {
+  padding: 20px;
+  border: 1px solid #eee;
+  border-left-width: 5px;
+  border-radius: 3px;
+  background-color: #fff;
+}
+
+.bs-callout-warning {
+  border-left-color: @mainColor !important;
+}
+
+.order-time {
+  margin-top: 20px;
+}
+
+.help-block {
+  font-size: 12px;
+}
+
+#next-button {
+  float: right;
+  width: 100px;
+  margin: 20px 15px 40px 0px;
+  background: linear-gradient(rgb(245, 175, 72), @mainColor);
+  border-color: darken(@mainColor, 10%);
+  color: white;
+
+  &:focus {
+    outline: 0px;
+  }
+}
+
+body {
+  background: rgb(240, 240, 240);
+}
+

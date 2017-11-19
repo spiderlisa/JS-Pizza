@@ -1,7 +1,48 @@
 <% include common/header.ejs %>
 
-<div class="">
-    Main Page Content
+<div class="main-container container-fluid">
+    <div class="row">
+        <div class="left-side">
+            <div class="top-row">
+                <div>Усі піци
+                    <span class="badge" id="by-type">9</span>
+                </div>
+                <a type="button" class="btn pressed" id="all">Усі</a>
+                <a type="button" class="btn" id="meat">М'ясні</a>
+                <a type="button" class="btn" id="pineapple">З ананасами</a>
+                <a type="button" class="btn" id="mushroom">З грибами</a>
+                <a type="button" class="btn" id="ocean">З морепродуктами</a>
+                <a type="button" class="btn" id="vegan">Вега</a>
+            </div>
+            <div class="row" id="pizza_list">
+                <!-- all pizzas are displayed here -->
+            </div>
+        </div>
+
+        <div id="cart">
+            <div class="separate" id="cart-header">
+                <span> Замовлення <span class="badge"></span> </span>
+                <a id="clear" type="button" class="btn btn-default">
+                    <p>Очистити</p>
+                    <p>замовлення</p>
+                </a>
+            </div>
+            <div id="orders">
+                <div class="empty-cart">
+                    <p>Пусто в холодильнику?</p>
+                    <p>Замовте пiцу!</p>
+                </div>
+                <!-- all orders in cart go here -->
+            </div>
+            <div class="separate" id="cart-bottom">
+                <p>
+                    <span>Сума замовлення</span>
+                    <span id="sum">0 грн</span>
+                </p>
+                <p><a type="button" class="btn" id="submit-order"> Замовити </a></p>
+            </div>
+        </div>
+    </div>
 </div>
 
 <% include common/footer.ejs %>

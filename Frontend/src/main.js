@@ -4,10 +4,15 @@
 
 $(function() {
     //This code will execute when the page is ready
-    var PizzaMenu = require('./pizza/PizzaMenu');
     var PizzaCart = require('./pizza/PizzaCart');
-    //var Pizza_List = require('./Pizza_List');
 
     PizzaCart.initialiseCart();
-    PizzaMenu.initialiseMenu();
+    if (document.location.href == "http://localhost:5050/order.html") {
+        var PizzaOrder = require('./pizza/PizzaOrder');
+        PizzaOrder.initializeOrder();
+    }else {
+        var PizzaMenu = require('./pizza/PizzaMenu');
+        PizzaMenu.initialiseMenu();
+    }
 });
+

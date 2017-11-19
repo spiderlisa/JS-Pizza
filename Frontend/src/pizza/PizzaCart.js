@@ -15,7 +15,7 @@ var sum = 0;
 
 //local storage
 var Storage = require('../LocalStorage');
-var orders = {};
+var orders = [];
 
 //HTML едемент куди будуть додаватися піци
 var $cart = $("#cart");
@@ -102,7 +102,23 @@ function updateCart() {
         $node.find(".delete").click(function() {
             removeFromCart(cart_item);
             updateCart();
-        })
+        });
+
+        if (document.location.href == "http://localhost:5050/order.html") {
+            $node.find(".plus").css("display", "none");
+            $node.find(".minus").css("display", "none");
+            $node.find(".delete").css("display", "none");
+            var piz = "";
+            if (cart_item.quantity==1) piz = "піца";
+            else if (cart_item.quantity % 10 == 2 || cart_item.quantity % 10 == 3 || cart_item.quantity % 10 == 4) piz = "піци";
+            else piz = "піц";
+            $node.find("#quantity").text(cart_item.quantity + " " + piz);
+        }else {
+            $node.find(".plus").css("display", "inline-block");
+            $node.find(".minus").css("display", "inline-block");
+            $node.find(".delete").css("display", "inline-block");
+            $node.find("#quantity").text(cart_item.quantity);
+        }
 
         $order.append($node);
     }
@@ -111,17 +127,27 @@ function updateCart() {
         sum += Number.parseInt(cart_item.pizza[cart_item.size].price) * Number.parseInt(cart_item.quantity);
     }
 
+    if (document.location.href == "http://localhost:5050/order.html") {
+        $header.find("#clear").css("visibility", "hidden");
+    }else {
+        $header.find("#clear").css("visibility", "visible");
+    }
     $header.find(".badge").text(Cart.length);
     $header.find("#clear").click(function() {
         Cart.forEach(removeFromCart);
     });
     $cart.append($header);
 
-    if (Cart.length == 0) {
-        //$empty_label.css('display', 'block');
-    }else {
-        //$empty_label.css('display', 'none');
+    if (Cart.length < 1) {
+        $order.html("<div class=\"empty-cart\" id = \"empty-fridge\">\n" +
+            "            Пусто в холодильнику?\n" +
+            "            <br>\n" +
+            "            Замовте піцу!\n" +
+            "            </div>");
+        $("#submit-order").attr("disabled", true);
+    } else {
         Cart.forEach(showOnePizzaInCart);
+        $("#submit-order").attr("disabled", false);
     }
     $cart.append($order);
 
@@ -131,6 +157,10 @@ function updateCart() {
 
     orders = Cart;
     Storage.set("cart", orders);
+
+    $("#submit-order").click(function () {
+        document.location.href = "http://localhost:5050/order.html";
+    });
 }
 
 exports.removeFromCart = removeFromCart;
