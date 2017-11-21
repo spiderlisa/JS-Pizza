@@ -14,6 +14,8 @@ var contact_info = {
 
 var $next = $("#next-button");
 
+var GoogleMaps = require('../GoogleMaps');
+
 function nameValid() {
     if (!/^[0-9A-Za-zА-Яа-яІіЇїЄєҐґ'/ -]+$/.test($("#inputName").val())) {
         $(".name-group").removeClass("has-success").addClass("has-error");
@@ -43,21 +45,37 @@ function phoneValid() {
 }
 
 function addressValid() {
-    if ($("#inputAddress").val().length < 1) {
-        $(".address-group").removeClass("has-success").addClass("has-error");
-        $(".address-group").find(".help-block").css("display", "inline-block");
-        return false;
-    }else {
-        $(".address-group").removeClass("has-error").addClass("has-success");
-        $(".address-group").find(".help-block").css("display", "none");
-        contact_info.address = $("#inputAddress").val();
-        Storage.set("info", contact_info);
-        return true;
-    }
+    GoogleMaps.geocodeAddress($("#inputAddress").val(), function(err, location){
+        if(err){
+            alert("Не вдалося встановити адресу.");
+            $(".address-group").removeClass("has-success").addClass("has-error");
+            $(".address-group").find(".help-block").css("display", "inline-block");
+
+            $(".order-time").text("невідомий");
+            $(".order-address").text("невідома");
+        }else {
+            GoogleMaps.calculateRoute(new google.maps.LatLng(50.464379, 30.519131), location, function(err, data){
+                if(!err){
+                    $(".order-time").text(data.duration.text);
+                }else {
+                    console.log(err);
+                }
+            });
+
+            $(".address-group").removeClass("has-error").addClass("has-success");
+            $(".address-group").find(".help-block").css("display", "none");
+
+            contact_info.address = $("#inputAddress").val();
+            Storage.set("info", contact_info);
+
+            $(".order-address").text($("#inputAddress").val());
+        }
+    });
 }
 
 function readData() {
-    var valid = nameValid($("#inputName").val()) && phoneValid($("#inputPhone").val()) && addressValid($("#inputAddress").val());
+    addressValid();
+    var valid = nameValid() && phoneValid() && $(".order-time").text()!="невідомий";
     if (valid) {
         API.createOrder({
             name: $("#inputName").val(),
@@ -66,30 +84,32 @@ function readData() {
             order: PizzaCart.getPizzaInCart(),
         }, function(err){
             if(err) {
-                alert("Oops! Something went wrong...");
+                alert("Щось пішло не так...");
                 return console.log("API.createOrder() failed. Call in PizzaOrder.js.");
             }
-            alert("Order successfully placed!");
+            alert("Замовлення оформлено. Дякуємо за користування онлайн сервісом.");
         });
     }else {
-        alert("Please, fill in the input fields.");
+        alert("Будь ласка, заповніть всі поля.");
     }
 }
 
 function initializeOrder() {
-    /*var contact_info = Storage.get("info");
+    var contact_info = Storage.get("info");
     if (contact_info) {
         if (contact_info.name) {
-            $name.val(contact_info.name);
+            $("#inputName").val(contact_info.name);
+            nameValid();
         }
         if (contact_info.phone) {
-            $phone.val(contact_info.phone);
+            $("#inputPhone").val(contact_info.phone);
+            phoneValid();
         }
         if (contact_info.address) {
-            $address.val(contact_info.address);
+            $("#inputAddress").val(contact_info.address);
+            addressValid();
         }
-    }*/
-
+    }
 
     $("#return-to-list").click(function () {
         document.location.href = "http://localhost:5050/";
@@ -104,8 +124,8 @@ $("#inputPhone").keyup(function() {
     phoneValid()
 });
 
-$("#inputAddress").keyup(function() {
-    addressValid()
+$("#inputAddress").keyup(function(key) {
+    if (key.keyCode == 13) addressValid()
 });
 
 $next.click(function() {
