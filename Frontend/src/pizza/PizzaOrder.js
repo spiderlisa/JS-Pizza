@@ -15,6 +15,7 @@ var contact_info = {
 var $next = $("#next-button");
 
 var GoogleMaps = require('../GoogleMaps');
+var LiqPay = require('../LiqPay');
 
 function nameValid() {
     if (!/^[0-9A-Za-zА-Яа-яІіЇїЄєҐґ'/ -]+$/.test($("#inputName").val())) {
@@ -81,13 +82,14 @@ function readData() {
             name: $("#inputName").val(),
             phone: $("#inputPhone").val(),
             address: $("#inputAddress").val(),
-            order: PizzaCart.getPizzaInCart(),
-        }, function(err){
+            order: PizzaCart.getPizzaInCart()
+        }, function(err, data){
             if(err) {
                 alert("Щось пішло не так...");
                 return console.log("API.createOrder() failed. Call in PizzaOrder.js.");
+            }else {
+                window.LiqPayCheckoutCallback = LiqPay.initialize(data.data, data.signature);
             }
-            alert("Замовлення оформлено. Дякуємо за користування онлайн сервісом.");
         });
     }else {
         alert("Будь ласка, заповніть всі поля.");
